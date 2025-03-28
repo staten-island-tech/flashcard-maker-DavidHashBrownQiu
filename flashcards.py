@@ -21,7 +21,7 @@ def flashcards():
         if ask.lower() == "teacher":
             question = input("What's your question? ")
             answer = input("What's your answer? ")
-            flashcards = []
+            flashcards = ()
             flash1 = Flashcard(question, answer)
             flash2 = flash1.text()
             flash1.append(flashcards)
