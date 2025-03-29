@@ -1,4 +1,5 @@
 import json
+import random
 
 ask = input("Which one are you? Teacher or student? ")
 
@@ -14,31 +15,48 @@ def flashcards():
             return{self.question: self.answer}
         
         def text(self):
-            (f"{self.question}, {self.answer}")
+            return(f"{self.question}, {self.answer}")
         
+    flashcards = []
+
+    question = input("Clear history of questions/answers? ").lower()
+
+    if question == "yes":
+        with open("flashcards.json", "w") as file:
+            json.dump({}, file, indent=4)
+        print("Cleared")
 
     while True:
+
         if ask.lower() == "teacher":
             question = input("What's your question? ")
             answer = input("What's your answer? ")
-            flashcards = ()
             flash1 = Flashcard(question, answer)
-            flash2 = flash1.text()
-            flash1.append(flashcards)
+            flashcards.append(flash1)
 
-            question = input("Continue (Yes/No): ").lower()
+        if ask.lower() == "student":
+            with open("flashcards.json", "r") as file:
+                data = json.load(file)
 
-            if question == "yes":
-                continue
+            question = random.choice(data)
+            answer = input(f"{question}") #NEED TO SELECT THE FIRST PART AND THEN FOCUS ON THE OTHER PART (FOR .ITEMS LOOP?)
 
-            flash2 = [flash1.dic() for flashcard in flashcards]
-            print(f"here are all the questions: {flash2}")
-            
-            with open("flashcards.json", "w") as file:
-                json.dump(flash2, file, indent=4)
 
-            if question == "no":
-                break
+
+        question = input("Continue (Yes/No): ").lower()
+
+        if question == "yes":
+            continue
+        
+        x = [flashcard.dic() for flashcard in flashcards]
+
+        with open("flashcards.json", "w") as file:
+            json.dump(x, file, indent=4)
+
+        if question == "no":
+            break            
+
+
 
 
             
