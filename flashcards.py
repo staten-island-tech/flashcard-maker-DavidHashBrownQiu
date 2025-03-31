@@ -5,6 +5,7 @@ ask = input("Which one are you? Teacher or student? ")
 
 def flashcards():
     correct = 0
+    streak = 0
 
     class Flashcard:
         def __init__(self, question, answer):
@@ -34,12 +35,22 @@ def flashcards():
             flash1 = Flashcard(question, answer)
             flashcards.append(flash1)
 
-        if ask.lower() == "student":
+        elif ask.lower() == "student":
             with open("flashcards.json", "r") as file:
                 data = json.load(file)
 
-            question = random.choice(data)
-            answer = input(f"{question}") #NEED TO SELECT THE FIRST PART AND THEN FOCUS ON THE OTHER PART (FOR .ITEMS LOOP?)
+            for first, second in data.items():
+                question = random.choice(first)
+                answer = second
+                ask = input(f"{question}")
+
+            if answer == ask:
+                correct = correct+1
+                print(f"Good job! You're streak is now {streak}")
+
+            
+
+
 
 
 
