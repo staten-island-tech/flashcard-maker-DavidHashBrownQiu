@@ -1,9 +1,8 @@
 import json
 import random
 
-ask = input("Which one are you? Teacher or student? ")
-
 def flashcards():
+    ask = input("Which one are you? Teacher or student? ")
     correct = 0
     streak = 0
 
@@ -38,20 +37,13 @@ def flashcards():
         elif ask.lower() == "student":
             with open("flashcards.json", "r") as file:
                 data = json.load(file)
-
+        
             for first, second in data.items():
-                question = random.choice(first)
-                answer = second
-                ask = input(f"{question}")
+                print(f"{first}: {second}")
 
             if answer == ask:
                 correct = correct+1
                 print(f"Good job! You're streak is now {streak}")
-
-            
-
-
-
 
 
         question = input("Continue (Yes/No): ").lower()
@@ -72,4 +64,3 @@ def flashcards():
 
             
 flashcards()    
-
