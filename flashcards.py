@@ -34,16 +34,22 @@ def flashcards():
             flash1 = Flashcard(question, answer)
             flashcards.append(flash1)
 
-        elif ask.lower() == "student":
+        if ask.lower() == "student":
             with open("flashcards.json", "r") as file:
                 data = json.load(file)
-        
-            for first, second in data.items():
-                print(f"{first}: {second}")
+            print(data)
+            
+            for str in data:
+                for first, second in str.items():
+                    question = random.choice(first)
+                    _answer = second
+                    print(f"{question}")
+                    answer = input("What's your answer?" )
 
-            if answer == ask:
+            if answer == _answer:
                 correct = correct+1
                 print(f"Good job! You're streak is now {streak}")
+                
 
 
         question = input("Continue (Yes/No): ").lower()
@@ -57,6 +63,7 @@ def flashcards():
             json.dump(x, file, indent=4)
 
         if question == "no":
+            print("Added to fiule")
             break            
 
 
