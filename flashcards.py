@@ -19,9 +19,9 @@ def flashcards():
         
     flashcards = []
 
-    question = input("Clear history of questions/answers? ").lower()
+    clear_question = input("Clear history of questions/answers? ").lower()
 
-    if question == "yes":
+    if clear_question == "yes":
         with open("flashcards.json", "w") as file:
             json.dump({}, file, indent=4)
         print("Cleared")
@@ -36,19 +36,16 @@ def flashcards():
 
         if ask.lower() == "student":
             with open("flashcards.json", "r") as file:
-                data = json.load(file)
-            print(data)
-            
-            for str in data:
-                for first, second in str.items():
-                    question = random.choice(first)
-                    _answer = second
-                    print(f"{question}")
-                    answer = input("What's your answer?" )
+                datas = json.load(file)   
 
-            if answer == _answer:
-                correct = correct+1
-                print(f"Good job! You're streak is now {streak}")
+            if datas:
+                first, second = random.choice(list(datas.items()))
+                print(f"Question: {first}")
+                _second = input("What's your answer?" ).lower()
+
+                if _second == second:
+                    correct = correct+1
+                    print(f"Good job! You're streak is now {streak}")
                 
 
 
@@ -57,13 +54,15 @@ def flashcards():
         if question == "yes":
             continue
         
-        x = [flashcard.dic() for flashcard in flashcards]
+        flashcards_dict = {}
+        for flashcard in flashcards:
+            flashcards_dict.update(flashcard.dic())
 
         with open("flashcards.json", "w") as file:
-            json.dump(x, file, indent=4)
+            json.dump(flashcards_dict, file, indent=4)
 
         if question == "no":
-            print("Added to fiule")
+            print("Added to file")
             break            
 
 
