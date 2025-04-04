@@ -41,13 +41,19 @@ def flashcards():
             if datas:
                 first, second = random.choice(list(datas.items()))
                 print(f"Question: {first}")
-                _second = input("What's your answer?" ).lower()
+                _second = input("What's your answer? ").lower()
 
                 if _second == second:
                     correct = correct+1
-                    print(f"Good job! You're streak is now {streak}")
-                
-
+                    streak = streak+1
+                    print(f"Good job! You have a streak of {streak} and a score of {correct}")
+                    if streak > 1:
+                        correct = correct+streak-1
+                        print(f"You gained extra points for your streak! Your score is now {correct}")
+                if _second != second:
+                    streak = 0
+                    correct = correct-1
+                    print(f"You lost your streak of {streak}. Your score is now {correct}")
 
         question = input("Continue (Yes/No): ").lower()
 
@@ -62,7 +68,7 @@ def flashcards():
             json.dump(flashcards_dict, file, indent=4)
 
         if question == "no":
-            print("Added to file")
+            print("Done!!")
             break            
 
 
