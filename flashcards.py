@@ -43,7 +43,7 @@ def flashcards():
                 print(f"Question: {first}")
                 _second = input("What's your answer? ").lower()
 
-                if _second == second:
+                if _second == second.lower():
                     correct = correct+1
                     streak = streak+1
                     print(f"Good job! You have a streak of {streak} and a score of {correct}")
