@@ -70,9 +70,5 @@ def flashcards():
         if question == "no":
             print("Done!!")
             break            
-
-
-
-
-            
+ 
 flashcards()    
